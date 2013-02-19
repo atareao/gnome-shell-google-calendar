@@ -4,7 +4,7 @@
 
 # This should be bumped every time a new deb
 # is published
-VERSION=1.0-0
+VERSION=1.0-1
 
 # The main executable will go here
 mkdir -p ./debian/usr/bin
