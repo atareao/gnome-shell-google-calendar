@@ -20,7 +20,7 @@ import os
 
 # Append the /usr/lib path for oauth and config libraries
 # as the installer places them
-sys.path.append("/usr/lib/gnome-shell-google-calendar")
+sys.path.insert(0, "/usr/lib/gnome-shell-google-calendar")
 
 import oauth
 import config
