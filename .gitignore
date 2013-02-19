@@ -2,3 +2,4 @@
 *~
 excludes
 config.json
+*.deb

@@ -1,0 +1,10 @@
+Package: gnome-shell-google-calendar
+Version: %%VERSION%%
+Section: base
+Priority: optional
+Architecture: source
+Depends: upstart, python (>= 2.6-0), python-dbus, python-gdata, python-iso8601 
+Maintainer: Michael Gerow <gerow.mike@gmail.com>
+Description: gnome-shell-google-calendar
+  A D-Bus service that fetches events from Google Calendar and makes them
+  available for GNOME Shell to display.
