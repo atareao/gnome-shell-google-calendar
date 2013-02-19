@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=gnome-shell-google-calendar
+GenericName=GNOME Shell Google Calendar Service
+Comment=A D-Bus service that fetches events from Google Calendar and makes them available for GNOME Shell to display.
+Exec=/usr/bin/gnome-shell-google-calendar.py
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
