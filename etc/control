@@ -3,7 +3,7 @@ Version: %%VERSION%%
 Section: base
 Priority: optional
 Architecture: all
-Depends: upstart, python (>= 2.6-0), python-dbus, python-gdata, python-iso8601 
+Depends: upstart, python (>= 2.6-0), python-dbus, python-gdata, python-iso8601, gnome-shell (>= 3.0-0), python-gtk2, python-gnomekeyring
 Maintainer: Michael Gerow <gerow.mike@gmail.com>
 Description: gnome-shell-google-calendar
   A D-Bus service that fetches events from Google Calendar and makes them
