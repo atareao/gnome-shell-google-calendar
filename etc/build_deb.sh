@@ -26,13 +26,13 @@ cp ../excludes-example ./debian/etc/gnome-shell-google-calendar
 # Create an excludes file in the right place
 touch ./debian/etc/gnome-shell-google-calendar/excludes
 # Copy all the libraries over
-cp ../config.py ../keyring.py ../oauth.py ../README ../test ./debian/usr/lib/gnome-shell-google-calendar
+cp ../config.py ../keyring.py ../oauth.py ../README ../README.old ../test ./debian/usr/lib/gnome-shell-google-calendar
 # Put the control file into place (replacing the version with the one in here)
 sed s\/%%VERSION%%\/${VERSION}\/g ./control > ./debian/DEBIAN/control
 
 dpkg-deb --build debian
 
-mv debian.deb gnome-shell-google-calendar_${VERSION}.deb
+mv debian.deb gnome-shell-google-calendar_${VERSION}_all.deb
 
 rm -r debian
 
