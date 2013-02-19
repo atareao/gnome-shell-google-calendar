@@ -18,6 +18,10 @@ import iso8601
 import calendar
 import os
 
+# Append the /usr/lib path for oauth and config libraries
+# as the installer places them
+sys.path.append("/usr/lib/gnome-shell-google-calendar")
+
 import oauth
 import config
 #  change to "True" to get debugging messages
@@ -258,7 +262,7 @@ class CalendarServer(dbus.service.Object):
         # Load excluded calendars from excludes file
         excludes = set()
         for filename in ('excludes',
-                os.path.expanduser('~/.gnome-shell-google-calendar-excludes')):
+                os.path.expanduser('~/.gnome-shell-google-calendar-excludes'), '/etc/gnome-shell-google-calendar/excludes'):
             if os.path.exists(filename):
                 excludes |= self.get_excludes(filename)
 
