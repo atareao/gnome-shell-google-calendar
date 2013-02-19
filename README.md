@@ -23,6 +23,8 @@ gnome-shell-google-calendar.py
 After you answer the initial question you may ^C out of the script and log out then log back into your session.  After a minute or so you should see your calendar events show up within the GNOME 3 interface.
 
 ## Using apt repository
+THIS IS CURRENTLY BROKEN... SO PLEASE USE THE ABOVE .deb FILE METHOD
+
 Currently I only know that this apt repository works with Ubuntu 12.04 (precise).  If you manage to get it to work using other versions of Ubuntu please let me know.  I'm still kinda trying to figure out how this whole hosting an apt repo thing works.
 
 ```bash
