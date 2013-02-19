@@ -8,8 +8,8 @@ VERSION=1.0-0
 
 # The main executable will go here
 mkdir -p ./debian/usr/bin
-# The upstart script will go here
-mkdir -p ./debian/etc/init
+# The autostart script will go here
+mkdir -p ./debian/etc/xdg/autostart
 # The config files (exclude file) will go here
 mkdir -p ./debian/etc/gnome-shell-google-calendar
 # The library files will go here
@@ -21,7 +21,7 @@ mkdir -p ./debian/DEBIAN
 find ./debian -type d | xargs chmod 775
 
 cp ../gnome-shell-google-calendar.py ./debian/usr/bin
-cp gnome-shell-google-calendar.conf ./debian/etc/init
+cp gnome-shell-google-calendar.desktop ./debian/etc/xdg/autostart
 cp ../excludes-example ./debian/etc/gnome-shell-google-calendar
 # Create an excludes file in the right place
 touch ./debian/etc/gnome-shell-google-calendar/excludes
