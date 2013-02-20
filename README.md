@@ -14,7 +14,7 @@ Installation using deb files is relatively easy.  Simply run the following comma
 wget http://packages.mgerow.com/static/gnome-shell-google-calendar_1.0-1_all.deb
 sudo dpkg -i gnome-shell-google-calendar_1.0-1_all.deb
 ```
-After this installation you must run the following command in order to initialize the config file.  It will as you to choose which google account to use for the calendar.  If none are set up for the user you will need to set them up and re-run the below command:
+After this installation you must run the following command in order to initialize the config file.  It will let you to choose which google account to use for the calendar.  If none are set up for the user you will need to set them up and re-run the below command:
 ```bash
 gnome-shell-google-calendar.py
 ```
