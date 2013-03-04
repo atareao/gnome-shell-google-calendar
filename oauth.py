@@ -22,6 +22,8 @@ def oauth_prompt():
                     ['PresentationIdentity'])
             print "%d. %s" % (len(accounts), email)
             accounts.append(email)
+    if len(accounts) == 1:
+      return accounts[0]
     email = accounts[int(raw_input('Please choose the Account: '))]
     print "You choose '{0}'".format(email)
     return email
