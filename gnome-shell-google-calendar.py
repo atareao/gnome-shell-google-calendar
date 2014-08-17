@@ -268,7 +268,7 @@ class CalendarServer(dbus.service.Object):
         # Load excluded calendars from excludes file
         excludes = set()
         for filename in ('excludes',
-                os.path.expanduser('~/.gnome-shell-google-calendar-excludes'), '/etc/gnome-shell-google-calendar/excludes'):
+                os.path.expanduser(config.local_config_dir +  'excludes'), config.global_config_dir + 'excludes'):
             if os.path.exists(filename):
                 excludes |= self.get_excludes(filename)
 
@@ -483,7 +483,7 @@ if __name__ == '__main__':
         password = config.get('password')
         if account is None or account == '' or password is None or password is '':
             print 'Account details not setup'
-            print 'Please setup the details at ~/.config/gnome-shell-google-calendar/config.json'
+            print 'Please setup the details at ' + config.local_config_dir + 'config.json'
             sys.exit (1)
         try:  
             client = gdata.calendar.client.CalendarClient(source='gnome-shell-google-calendar')
