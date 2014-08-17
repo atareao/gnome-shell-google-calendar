@@ -30,6 +30,12 @@ debug = False
 
 SHOW_SHORT_CALENDAR_TITLE = True
 GET_ACCOUNT_FROM_CONFIG = False
+HELP_STRING = ''' 
+  Options:
+   --help          Show this help
+   --hide-cal          Do not show Calendar Identification beside events
+   --manual-account    Get Account Details from the config file rather than from Gnome Online Accounts 
+ '''
 
 def write_traceback(f):
     '''Wrapper that catches any tracebacks that are found and writes them to
@@ -451,7 +457,7 @@ class CalendarServer(dbus.service.Object):
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
-    opts, args = getopt.getopt(sys.argv[1:], '', ['hide-cal', 'account=', 'manual-account'])
+    opts, args = getopt.getopt(sys.argv[1:], '', ['hide-cal', 'account=', 'manual-account', 'help'])
     account = None
     password = None
 
@@ -462,6 +468,10 @@ if __name__ == '__main__':
             account = a
         if o == '--manual-account':
             GET_ACCOUNT_FROM_CONFIG = True
+        if o == '--help':
+            print (HELP_STRING)
+            sys.exit (0)
+            
 
     if not account:
         account = config.get('account')
