@@ -31,10 +31,17 @@ debug = False
 SHOW_SHORT_CALENDAR_TITLE = True
 GET_ACCOUNT_FROM_CONFIG = False
 HELP_STRING = ''' 
-  Options:
-   --help          Show this help
-   --hide-cal          Do not show Calendar Identification beside events
-   --manual-account    Get Account Details from the config file rather than from Gnome Online Accounts 
+Options:
+    --help              Show this help
+    --hide-cal          Do not show Calendar Identification beside events
+    --manual-account    Get Account Details from the config file rather than from Gnome Online Accounts. 
+
+Local Config directory: ''' + config.local_config_dir + '''
+
+Keys in config.json:
+    * manual    - Setting to "true" has the same effect as --manual-accout command-line option.
+    * account   - The Google Account for which calendars are fetched
+    * password  - The Account password (If 2-factor authentication is enabled, this needs to be an app-specific password)
  '''
 
 def write_traceback(f):
@@ -472,9 +479,11 @@ if __name__ == '__main__':
             print (HELP_STRING)
             sys.exit (0)
             
-
     if not account:
         account = config.get('account')
+
+    if config.get('manual') == 'true':
+        GET_ACCOUNT_FROM_CONFIG = True
 
     # Login
     client = None
