@@ -29,7 +29,7 @@ debug = False
 
 
 SHOW_SHORT_CALENDAR_TITLE = True
-
+GET_ACCOUNT_FROM_CONFIG = False
 
 def write_traceback(f):
     '''Wrapper that catches any tracebacks that are found and writes them to
@@ -451,38 +451,59 @@ class CalendarServer(dbus.service.Object):
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
-    opts, args = getopt.getopt(sys.argv[1:], '', ['hide-cal', 'account='])
+    opts, args = getopt.getopt(sys.argv[1:], '', ['hide-cal', 'account=', 'manual-account'])
     account = None
+    password = None
+
     for o, a in opts:
         if o == '--hide-cal':
             SHOW_SHORT_CALENDAR_TITLE = False
         if o == '--account':
             account = a
+        if o == '--manual-account':
+            GET_ACCOUNT_FROM_CONFIG = True
 
     if not account:
         account = config.get('account')
 
     # Login
     client = None
-    while not client:
-        print "Logging in as '%s'..." % account
-        try:
-            client = oauth.oauth_login(account)
-        except Exception:
+
+    if GET_ACCOUNT_FROM_CONFIG:
+        password = config.get('password')
+        if account is None or account == '' or password is None or password is '':
+            print 'Account details not setup'
+            print 'Please setup the details at ~/.config/gnome-shell-google-calendar/config.json'
+            sys.exit (1)
+        try:  
+            client = gdata.calendar.client.CalendarClient(source='gnome-shell-google-calendar')
+            client.ClientLogin(account, password, client.source)
+        except Exception as e:
             print 'Error logging in as \'%s\'' % account
-            print ('\'%s\' may not be a GNOME online account. '
-                    'A list of existing accounts is below.') % account
-            print ('If you do not see a list of accounts, '
-                    'then you first need to add one.')
-            print ('For more information, see '
-                    'http://library.gnome.org/users/gnome-help/stable/'
-                    'accounts.html')
+            print '%s' % e.args
+            #print ('Invalid credentials for: \'%s\'.') % account
+            sys.exit(1)
+
+    else:
+        while not client:
+            print "Logging in as '%s'..." % account
             try:
-                account = oauth.oauth_prompt()
-            except ValueError:
-                print ('You have entered an invalid account number. '
-                        'Please enter an integer.')
-            config.set('account', account)
+                client = oauth.oauth_login(account)
+            except Exception:
+                print 'Error logging in as \'%s\'' % account
+                print ('\'%s\' may not be a GNOME online account. '
+                        'A list of existing accounts is below.') % account
+                print ('If you do not see a list of accounts, '
+                        'then you first need to add one.')
+                print ('For more information, see '
+                        'http://library.gnome.org/users/gnome-help/stable/'
+                        'accounts.html')
+                try:
+                    account = oauth.oauth_prompt()
+                except ValueError:
+                    print ('You have entered an invalid account number. '
+                            'Please enter an integer.')
+                config.set('account', account)
 
     myserver = CalendarServer(client)
     gtk.main()
