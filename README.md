@@ -6,7 +6,7 @@ Google Calendar in GNOME Shell
 This version of gnome-shell-google-calendar is forked from vintitres's version.  This version is intended to allow easier installation to debian based platforms.
 
 Installation
-=========
+============
 
 ## Using .deb files
 Installation using deb files is relatively easy.  Simply run the following commands:
@@ -22,18 +22,20 @@ After you answer the initial question you may ^C out of the script and log out t
 
 
 Excluding Calendars
-==============
-If you would like to exclude some calendars from showing up you should add them to ~/.gnome-shell-google-calendar-excludes with one entry per line.
+===================
+If you would like to exclude some calendars from showing up you should add them to ~/.config/gnome-shell-google-calendar/excludes with one entry per line.
 
 Changes from vintitres's version
-========================
+================================
 
-There aren't a huge amount of changes from vintitres's version, but I'll list them here:
+There aren't a huge amount of changes from vintitres's version, but the major one are:
 
-First, I've changed the place where the config.json file is saved.  By default it seems to be cwd, but this version saves them in ~/.config/gnome-shell-google-calendar.
+* The place where the config.json file is saved has been.  By default it seems to be cwd, but this version saves them in ~/.config/gnome-shell-google-calendar.
 
-I've made it to where exclusions can be loaded from /etc/gnome-shell-google-calendar/excludes if they aren't found in the user's directory.
+* Exclusions can be loaded from /etc/gnome-shell-google-calendar/excludes if they aren't found in the user's directory.
 
-I've made it to where the main executable can include from the /usr/lib/gnome-shell-google-calendar directory, in order to facilitate a an installation to /usr/bin
+* Main executable can include from the /usr/lib/gnome-shell-google-calendar directory, in order to facilitate a an installation to /usr/bin
 
-I've added an autostart script that can be used when gnome-shell-google-calendar.py is installed to /usr/bin
+* Added an autostart script that can be used when gnome-shell-google-calendar.py is installed to /usr/bin
+
+* Given an option to use login details directly from config.json, rather than from GNOME Online accounts
